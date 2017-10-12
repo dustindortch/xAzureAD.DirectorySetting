@@ -2,15 +2,15 @@ function _temp{[CmdletBinding(SupportsShouldProcess)] param() Write-Verbose "Tem
 $Script:DefaultParams = (Get-Command _temp | Select-Object -ExpandProperty parameters).Keys
 Remove-Item function:\_temp
 
-function Set-AzureADDirectorySetting
+function Set-AzureADGroupsSetting
 {
     <#
     .SYNOPSIS
-        Set-AzureADDirectorySetting adjusts settings for Office 365 Groups
+        Set-AzureADGroupsSetting adjusts settings for Office 365 Groups
     .DESCRIPTION
-        Set-AzureADDirectorySetting adjusts settings for Office 365 Groups and depends on the AzureADPreview module
+        Set-AzureADGroupsSetting adjusts settings for Office 365 Groups and depends on the AzureADPreview module
     .EXAMPLE
-        Set-AzureADDirectorySetting -GroupCreationAllowedGroup <GroupName> -EnableGroupCreation [$true|$false]
+        Set-AzureADGroupsSetting -GroupCreationAllowedGroup <GroupName> -EnableGroupCreation [$true|$false]
     .INPUTS
         Inputs to this cmdlet (if any)
     .OUTPUTS
@@ -29,55 +29,42 @@ function Set-AzureADDirectorySetting
     Param
     (
         # CustomBlockedWordsList help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [String]$CustomBlockedWordsList,
 
         # EnableMSStandardBlockedWords help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [Boolean]$EnableMSStandardBlockedWords,
 
         # ClassificationDescriptions help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [String]$ClassificationDescriptions,
 
         # DefaultClassification help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [String]$DefaultClassification,
 
         # PrefixSuffixNamingRequirement help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [String]$PrefixSuffixNamingRequirement,
 
         # AllowGuestsToBeGroupOwner help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [boolean]$AllowGuestsToBeGroupOwner,
 
         # AllowGuestsToAccessGroups help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [Boolean]$AllowGuestsToAccessGroups,
 
         # GuestUsageGuidelinesUrl help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [String]$GuestUsageGuidelinesUrl,
 
         # GroupCreationAllowedGroupId help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [String]$GroupCreationAllowedGroup,
 
         # AllowToAddGuests help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [Boolean]$AllowToAddGuests,
 
         # UsageGuidelinesUrl help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [String]$UsageGuidelinesUrl,
 
         # ClassificationList help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [String]$ClassificationList,
 
         # EnableGroupCreation help description
-        [Parameter(ParameterSetName='Group.Unified')]
         [Boolean]$EnableGroupCreation
     )
 
@@ -115,7 +102,7 @@ function Set-AzureADDirectorySetting
     }
     Process
     {
-        AzureADPreview\Set-AzureADDirectorySetting -Id (Get-AzureADDirectorySetting | Where-Object -Property DisplayName -Value "Group.Unified" -EQ).id -DirectorySetting $Setting
+        Set-AzureADDirectorySetting -Id (Get-AzureADDirectorySetting | Where-Object -Property DisplayName -Value "Group.Unified" -EQ).id -DirectorySetting $Setting
     }
     End
     {
