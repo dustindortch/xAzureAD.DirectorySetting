@@ -1,6 +1,6 @@
 @{
     RootModule = 'xAzureAD.DirectorySetting.psm1'
-    ModuleVersion = '0.1'
+    ModuleVersion = '0.2'
     Author = 'Dustin Dortch'
     Description = 'Azure AD Directory Setting for Office 365 Groups'
     PowerShellVersion = '5.0'
